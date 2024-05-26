@@ -16,9 +16,9 @@ lsit_of_files = [
     'src/pipeline/__init__.py',
     'src/entity/__init__.py',
     'src/constants/__init__.py',
-    'config/config.ymal',
-    'dvc.ymal',
-    'prams.ymal',
+    'config/config.yaml',
+    'dvc.yaml',
+    'params.yaml',
     'requirements.txt',
     'setup.py',
     'research/trails.ipynb'

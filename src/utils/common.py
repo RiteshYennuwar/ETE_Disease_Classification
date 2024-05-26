@@ -35,3 +35,8 @@ def save_json(path:Path, data: dict):
         json.dump(data, f, indent=4)
 
     logger.info(f'json file saved at {path}')
+
+@ensure_annotations
+def get_size(path:Path) -> str:
+    size_in_kb = round(os.path.getsize(path)/1024)
+    return f'~ {size_in_kb} KB'
