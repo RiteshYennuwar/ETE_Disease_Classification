@@ -1,7 +1,7 @@
 import os
 from src.constants import *
 from src.utils.common import read_yaml, create_dir
-from src.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig, TrainingConfig
+from src.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig, TrainingConfig, EvaluationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -82,3 +82,15 @@ class ConfigurationManager:
         )
 
         return training_config
+    
+    def get_validation_config(self) -> EvaluationConfig:
+        eval_config = EvaluationConfig(
+            path_of_model = self.config.training.trained_model_path,
+            training_data = os.path.join(self.config.data_ingestion.unzip_dir,'Chicken-fecal-images'),
+            evaluation = self.config.evaluation.root_dir,
+            all_params= self.params,
+            params_image_size=self.params.IMAGE_SIZE,
+            params_batch_size=self.params.BATCH_SIZE
+        )
+    
+        return eval_config

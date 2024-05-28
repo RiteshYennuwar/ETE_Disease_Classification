@@ -35,3 +35,12 @@ class TrainingConfig:
     params_batch_size: int
     params_is_augmented: bool
     params_image_size: list
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    path_of_model: Path
+    training_data: Path
+    evaluation: Path
+    all_params: dict
+    params_image_size: list
+    params_batch_size: int
