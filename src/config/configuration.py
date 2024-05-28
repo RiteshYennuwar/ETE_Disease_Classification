@@ -1,7 +1,7 @@
 import os
 from src.constants import *
 from src.utils.common import read_yaml, create_dir
-from src.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig
+from src.entity.config_entity import DataIngestionConfig, BaseModelConfig, CallbacksConfig, TrainingConfig
 
 class ConfigurationManager:
     def __init__(
@@ -60,3 +60,25 @@ class ConfigurationManager:
         )
 
         return callbacks_config
+    
+    def get_training_config(self) -> TrainingConfig:
+        training = self.config.training
+        base_model = self.config.base_model
+        params = self.params
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir,'Chicken-fecal-images')
+        create_dir([
+            Path(training.root_dir)
+        ])
+
+        training_config = TrainingConfig(
+            root_dir=Path(training.root_dir),
+            trained_model_path=Path(training.trained_model_path),
+            updated_base_model_path=Path(base_model.updated_base_model_path),
+            training_data=Path(training_data),
+            params_epochs=params.EPOCHS,
+            params_batch_size=params.BATCH_SIZE,
+            params_is_augmented=params.AUGMENTATION,
+            params_image_size=params.IMAGE_SIZE
+        )
+
+        return training_config
