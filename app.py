@@ -17,16 +17,12 @@ class APP:
 
 clApp = APP()
 
+os.system('dvc repro')
+
 @app.route('/', methods =['GET'])
 @cross_origin()
 def home():
     return render_template('index.html')
-
-@app.route('/train', methods = ['GET','POST'])
-@cross_origin()
-def trainRoute():
-    os.system('dvc repro')
-    return 'Training done successfully!'
 
 @app.route('/predict',methods = ['POST'])
 @cross_origin()
