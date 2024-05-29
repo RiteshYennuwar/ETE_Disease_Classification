@@ -41,15 +41,13 @@ To get started with the project, follow these steps:
 
 ## Usage
 
-- **Flask App**: Run the Command
+- **Flask App**:  To start the application and run the DVC pipeline for data ingestion, model training, and evaluation, execute the following command:
     ```bash
     python app.py
 
-This will run the dvc pipeline to train the model along with data ingestion and model evaluation.
+After running the command, navigate to http://127.0.0.1:4000 in your web browser to access the application.
 
-Then navigate to http://127.0.0.1:4000 to run the app in the local browser
-
-make sure to upload the image of the chicken fecal that you suspect to have Coccidiosis disease
+**Image Upload** : Make sure to upload an image of the chicken fecal matter that you suspect to have Coccidiosis disease for prediction.
 
 ## Docker Setup
 
