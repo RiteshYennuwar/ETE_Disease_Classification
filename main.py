@@ -4,10 +4,10 @@ from src.pipeline.STAGE2_base_model import BaseModelPipeline
 from src.pipeline.STAGE3_training import ModelTrainingPipeline
 from src.pipeline.STAGE4_evaluation import EvaluationPipeline
 
-STAGE_NAME = 'Data Ingestion Stage'
+STAGE_NAME = 'Data Ingestion'
 
 try:
-    logger.info(f'---->> Stage {STAGE_NAME} Started <<----')
+    logger.info(f'x===================x\n\n---->> Stage {STAGE_NAME} Started <<----')
     data_ingestion = DataIngestionPipeline()
     data_ingestion.main()
     logger.info(f'---->> Stage {STAGE_NAME} Completed <<----\n\nx===================x')

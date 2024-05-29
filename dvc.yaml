@@ -1,0 +1,52 @@
+stages:
+  data_ingestion:
+    cmd: python src\pipeline\STAGE1_data_ingestion.py
+    deps:
+      - src\pipeline\STAGE1_data_ingestion.py
+      - config\config.yaml
+    outs:
+      - artifacts\data_ingestion\Chicken-fecal-images
+
+  base_model:
+    cmd: python src\pipeline\STAGE2_base_model.py
+    deps:
+      - src\pipeline\STAGE2_base_model.py
+      - config\config.yaml
+    params:
+      - IMAGE_SIZE
+      - INCLUDE_TOP
+      - CLASSES
+      - WEIGHTS
+      - LEARNING_RATE
+    outs:
+      - artifacts\base_model
+
+  training:
+    cmd: python src\pipeline\STAGE3_training.py
+    deps:
+      - src\pipeline\STAGE3_training.py
+      - src\components\callbacks.py
+      - config\config.yaml
+      - artifacts\data_ingestion\Chicken-fecal-images
+      - artifacts\base_model
+    params:
+      - IMAGE_SIZE
+      - EPOCHS
+      - BATCH_SIZE
+      - AUGMENTATION
+    outs:
+      - artifacts\training\model.keras
+
+  evaluation:
+    cmd: python src\pipeline\STAGE4_evaluation.py
+    deps:
+      - src\pipeline\STAGE4_evaluation.py
+      - config\config.yaml
+      - artifacts\data_ingestion\Chicken-fecal-images
+      - artifacts\training\model.keras
+    params:
+      - IMAGE_SIZE
+      - BATCH_SIZE
+    metrics:
+      - artifacts\evaluation\scores.json:
+          cache: false
